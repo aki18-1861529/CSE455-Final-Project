@@ -15,8 +15,8 @@ def im2double(im):
 def avg_images():
     """
     Gets all jpg images from the imgs and converts them to greyscale, resizes
-    them to be m x n, and calculates their averages. Returns a list that contains
-    the sum, the vector of averages, and the number of images.
+    them to be m x n, and calculates their averages. Returns a list that
+    contains the sum, the vector of averages, and the number of images.
     """
     m = 168
     n = 192

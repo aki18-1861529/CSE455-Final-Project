@@ -80,10 +80,12 @@ class PCA:
     def euc_dist(u, v):
         return np.sqrt(np.sum(np.square(u, v)))
 
-    #  Predict who this is.
-    #  On failure, returns None.
-    #  Returns id of best match and euclidean dist, otherwise
-    #  Eucludean dist can be used to determine uncertainty
+    # Predict who this is.
+    # On failure, returns None.
+    # Returns id of best match and euclidean dist, otherwise.
+    # Eucludean dist can be used to determine uncertainty.
+    # Eucludean distance above a cetain point should be understood
+    # as no-match.
     def predict(self, img_path:str):
         match = -1
         if not os.path.isfile(img_path):

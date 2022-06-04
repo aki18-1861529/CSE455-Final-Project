@@ -9,6 +9,7 @@ from PIL import Image
 
 
 def im2double(im):
+    assert not np.issubdtype(im.dtype, np.float64)
     return im.astype('float') / (np.iinfo(im.dtype)).max
 
 
@@ -29,7 +30,7 @@ def avg_images():
 
     sum = np.zeros((n, m))
     for i in range(len(imgs)):
-        im = cv2.resize(im2double(imgs[i]), [m, n])
+        im = cv2.resize(im2double(imgs[i]), (m, n))
         sum = np.add(sum, im)
 
     avg = sum / len(imgs)

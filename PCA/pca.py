@@ -1,3 +1,4 @@
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -24,10 +25,16 @@ class PCA:
         self.UrT
         self.Avg_Face
 
-    #  Named train as it it prepares a model and therefore the equivalent
-    #  of a neural network's train function.
-    #  PCA, however, is able to train in a single pass through
+    def im2double(self, im):
+        assert not np.issubdtype(im.dtype, np.float64)
+        return im.astype('float') / (np.iinfo(im.dtype)).max
+
     def train(self):
+        """
+        Named train as it it prepares a model and therefore the equivalent
+        of a neural network's train function.
+        PCA, however, is able to train in a single pass through
+        """
         mat_contents = scipy.io.loadmat(os.path.join('..','data','allFaces.mat'))
 
         faces = mat_contents['faces']
@@ -60,15 +67,11 @@ class PCA:
         return self.UrT @ (face_vector - self.Avg_Face)
 
     def add_person(self, id, path, name=""):
-        """"""
-        
-        Sum_Face = 0
-        n = 0
-        Avg_Person = 0
-        
-        """"""
-        alpha = self.compute_alpha(Avg_Person)
-        p = person(id, alpha, Avg_Person, name)
+        Sum_Img, avg_vector, n =self.avg_images(path)
+        sum_vector = np.reshape(Sum_Img, (self.n * self.m, 1), 'F')
+
+        alpha = self.compute_alpha(avg_vector)
+        p = person(id, alpha, sum_vector, n, name)
         self.persons[id] = p
 
     def update_person(self, id:int, Sum_Face:np.ndarray, face_vector:np.ndarray):
@@ -76,17 +79,20 @@ class PCA:
         self.persons[id].n += 1
         avg = self.persons[id].Sum_Face / self.persons[id].n
         alpha = self.compute_alpha(avg)
+        self.persons[id].alpha = alpha
 
-    def euc_dist(u, v):
+    def euc_dist(self, u, v):
         return np.sqrt(np.sum(np.square(u, v)))
-
-    # Predict who this is.
-    # On failure, returns None.
-    # Returns id of best match and euclidean dist, otherwise.
-    # Eucludean dist can be used to determine uncertainty.
-    # Eucludean distance above a cetain point should be understood
-    # as no-match.
+    
     def predict(self, img_path:str):
+        """
+        Predict who this is.
+        On failure, returns None.
+        Returns id of best match and euclidean dist, otherwise.
+        Eucludean dist can be used to determine uncertainty.
+        Eucludean distance above a cetain point should be understood
+        as no-match.
+        """
         match = -1
         if not os.path.isfile(img_path):
             return match
@@ -106,5 +112,27 @@ class PCA:
             if dist < min_dist:
                 min_dist = dist
                 match = id
-
         return match, min_dist
+    
+    def avg_images(self, img_dir):
+        """
+        Gets all jpg images from the imgs and converts them to greyscale, resizes
+        them to be m x n, and calculates their averages. Returns a list that
+        contains the sum, the vector of averages, and the number of images.
+        """
+
+        imgs = []
+        for filename in Path(img_dir).glob('*.jpg'):
+            im = cv2.cvtColor(cv2.imread(filename), cv2.COLOR_RGB2GRAY)
+            imgs.append(im)
+
+        sum = np.zeros((self.n, self.m))
+        for i in range(len(imgs)):
+            im = cv2.resize(self.im2double(imgs[i]), (self.m, self.n))
+            sum = np.add(sum, im)
+
+        avg = sum / len(imgs)
+        x = np.reshape(avg, (self.n * self.m, 1), 'F')
+        count = len(imgs)
+
+        return (sum, x, count)

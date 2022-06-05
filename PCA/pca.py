@@ -6,7 +6,7 @@ import scipy.io
 import cv2
 
 class person:
-    def __init__(self, id, alpha, sum, n, name = "") -> None:
+    def __init__(self, id, alpha, sum, n, name="") -> None:
         self.name = name
         self.id = id
         self.alpha = alpha
@@ -14,7 +14,6 @@ class person:
         self.n = n
 
 class PCA:
-    
     def __init__(self, data_path: str, m, n) -> None:
         self.data_path = data_path
         # Connects id to person
@@ -63,19 +62,18 @@ class PCA:
         np.save("UrT.npy", Ur.T)
         np.save("avg_face_vector.npy", avg_face_vector)
 
-
     def compute_alpha(self, face_vector):
         return self.UrT @ (face_vector - self.avg_face_vector)
 
     def add_person(self, id, path, name=""):
-        Sum_Img, avg_vector, n =self.avg_images(path)
+        Sum_Img, avg_vector, n = self.avg_images(path)
         sum_vector = np.reshape(Sum_Img, (self.n * self.m, 1), 'F')
 
         alpha = self.compute_alpha(avg_vector)
         p = person(id, alpha, sum_vector, n, name)
         self.persons[id] = p
 
-    def update_person(self, id:int, face_vector:np.ndarray):
+    def update_person(self, id: int, face_vector: np.ndarray):
         self.persons[id].Sum_Face += face_vector
         self.persons[id].n += 1
         avg = self.persons[id].Sum_Face / self.persons[id].n
@@ -84,8 +82,8 @@ class PCA:
 
     def euc_dist(self, u, v):
         return np.sqrt(np.sum(np.square(u, v)))
-    
-    def predict(self, img_path:str):
+
+    def predict(self, img_path: str):
         """
         Predict who this is.
         On failure, returns None.
@@ -97,13 +95,13 @@ class PCA:
         match = -1
         if not os.path.isfile(img_path):
             return match
-        
+
         img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (self.m, self.n))
         face_vector = np.reshape(img, (self.m * self.n, 1), 'F')
 
         alpha = self.compute_alpha(self, face_vector)
-    
+
         #  Find person with most similar alpha
         #  Ignore first 3 principle components as these will have most
         #  to do lighting
@@ -114,14 +112,13 @@ class PCA:
                 min_dist = dist
                 match = id
         return match, min_dist
-    
+
     def avg_images(self, img_dir):
         """
         Gets all jpg images from the imgs and converts them to greyscale, resizes
         them to be m x n, and calculates their averages. Returns a list that
         contains the sum, the vector of averages, and the number of images.
         """
-
         imgs = []
         for filename in Path(img_dir).glob('*.jpg'):
             im = cv2.cvtColor(cv2.imread(str(filename)), cv2.COLOR_RGB2GRAY)

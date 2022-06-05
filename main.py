@@ -40,7 +40,6 @@ def main(file:str, train:bool):
 
 
     """ Prediction
-
     take face
     find alpha
     compare

@@ -1,3 +1,7 @@
 data/PCA/allFaces.mat
 .DS_Store
 .vscode
+U.npy
+UrT.npy
+avg_face_vector.npy
+data/

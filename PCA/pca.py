@@ -5,6 +5,7 @@ import os
 import scipy.io
 import cv2
 
+
 class person:
     def __init__(self, id, alpha, sum, n, name="") -> None:
         self.name = name
@@ -12,6 +13,7 @@ class person:
         self.alpha = alpha
         self.sum = sum
         self.n = n
+
 
 class PCA:
     def __init__(self, data_path: str, m, n) -> None:
@@ -34,7 +36,7 @@ class PCA:
         of a neural network's train function.
         PCA, however, is able to train in a single pass through
         """
-        mat_contents = scipy.io.loadmat(os.path.join('.','data','allFaces.mat'))
+        mat_contents = scipy.io.loadmat(os.path.join('.', 'data', 'allFaces.mat'))
 
         faces = mat_contents['faces']
         self.m = int(mat_contents['m'])
@@ -115,9 +117,9 @@ class PCA:
 
     def avg_images(self, img_dir):
         """
-        Gets all jpg images from the imgs and converts them to greyscale, resizes
-        them to be m x n, and calculates their averages. Returns a list that
-        contains the sum, the vector of averages, and the number of images.
+        Gets all jpg images from the imgs and converts them to greyscale,
+        resizesthem to be m x n, and calculates their averages. Returns a list
+        that contains the sum, the vector of averages, and the number of images.
         """
         imgs = []
         for filename in Path(img_dir).glob('*.jpg'):

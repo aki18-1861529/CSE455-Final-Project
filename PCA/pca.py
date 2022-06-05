@@ -15,15 +15,15 @@ class person:
 
 class PCA:
     
-    def __init__(self, data_path: str) -> None:
+    def __init__(self, data_path: str, m, n) -> None:
         self.data_path = data_path
         # Connects id to person
         self.persons = dict()
-        self.m
-        self.n
-        self.U
-        self.UrT
-        self.Avg_Face
+        self.m = m
+        self.n = n
+        self.U = None
+        self.UrT = None
+        self.Avg_Face = None
 
     def im2double(self, im):
         assert not np.issubdtype(im.dtype, np.float64)
@@ -35,7 +35,7 @@ class PCA:
         of a neural network's train function.
         PCA, however, is able to train in a single pass through
         """
-        mat_contents = scipy.io.loadmat(os.path.join('..','data','allFaces.mat'))
+        mat_contents = scipy.io.loadmat(os.path.join('.','data','allFaces.mat'))
 
         faces = mat_contents['faces']
         self.m = int(mat_contents['m'])
@@ -123,7 +123,7 @@ class PCA:
 
         imgs = []
         for filename in Path(img_dir).glob('*.jpg'):
-            im = cv2.cvtColor(cv2.imread(filename), cv2.COLOR_RGB2GRAY)
+            im = cv2.cvtColor(cv2.imread(str(filename)), cv2.COLOR_RGB2GRAY)
             imgs.append(im)
 
         sum = np.zeros((self.n, self.m))

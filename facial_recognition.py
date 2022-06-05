@@ -5,6 +5,7 @@ Facial Recognition
 import glob
 import cv2
 import numpy as np
+from PCA.pca import *
 from PIL import Image
 
 
@@ -45,6 +46,16 @@ def main():
     print(res[0])
     print(res[1])
     print(res[2])
+    pca = PCA(data_path="./data", m=168, n=192)
+    for id, x in enumerate(os.walk("./data")):
+        if x[0] != "./data":
+            path = x[0]
+            name = path.split("\\")[1]
+            print(x[0])
+            print(name)
+            print(id)
+            pca.train()
+            pca.add_person(id, path, name)
 
 
 if __name__ == '__main__':

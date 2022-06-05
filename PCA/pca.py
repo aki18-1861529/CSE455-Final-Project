@@ -23,7 +23,7 @@ class PCA:
         self.n
         self.U
         self.UrT
-        self.Avg_Face
+        self.avg_face_vector
 
     def im2double(self, im):
         assert not np.issubdtype(im.dtype, np.float64)
@@ -41,30 +41,31 @@ class PCA:
         self.m = int(mat_contents['m'])
         self.n = int(mat_contents['n'])
 
-        Avg_Face = np.mean(faces, axis=1)
+        avg_face_vector = np.mean(faces, axis=1, dtype='float64')
+        avg_face_vector = np.reshape(avg_face_vector, (self.n*self.m, 1))
 
-        X = faces - np.tile(Avg_Face, (faces.shape[1],1)).T
+        X = faces - np.tile(avg_face_vector, (faces.shape[1], 1)).T
         U, S, VT = np.linalg.svd(X, full_matrices=0)
 
         r = 800
 
-        d = plt.imshow(np.reshape(Avg_Face, (self.m, self.n)).T)
+        d = plt.imshow(np.reshape(avg_face_vector, (self.m, self.n)).T)
         d.set_cmap('gray')
         plt.axis('off')
         plt.show()
 
         Ur = U[:, :r]
-        print(np.shape(Avg_Face))
+        print(np.shape(avg_face_vector))
         self.U = U
         self.UrT = Ur.T
-        self.Avg_Face = Avg_Face
+        self.avg_face_vector = avg_face_vector
         np.save("U.npy", U)
         np.save("UrT.npy", Ur.T)
-        np.save("Avg_Face.npy", Avg_Face)
+        np.save("avg_face_vector.npy", avg_face_vector)
 
 
     def compute_alpha(self, face_vector):
-        return self.UrT @ (face_vector - self.Avg_Face)
+        return self.UrT @ (face_vector - self.avg_face_vector)
 
     def add_person(self, id, path, name=""):
         Sum_Img, avg_vector, n =self.avg_images(path)

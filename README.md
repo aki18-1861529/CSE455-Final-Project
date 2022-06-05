@@ -11,5 +11,5 @@ PCA/pca.py contains functions used to train our function, add a person to be ind
 from an image is (or return None if the person is unidentified),
 and also to average all the images of a person after converting
 them to grayscale, and resizing them to be a specifed size. This
-file also has two classes. The first class is a person class, which is defined by a name, id, alpha, sum and n. The PCA class is defined by m, n (the dimentions the images should be resized to).
-U, UrT, and Avg_Face.
+file also has two classes. The first class is a person class, which is defined by a name, id, alpha (the projection of a given face onto the data), sum and n. The PCA class is defined by m, n (the dimentions the images should be resized to).
+U (the unitary matrix from the SVD of the data), UrT (the transpose of the rank approximation of U) and Avg_Face (the average of the data).

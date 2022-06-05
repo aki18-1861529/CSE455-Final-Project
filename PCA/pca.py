@@ -19,8 +19,8 @@ class PCA:
         self.data_path = data_path
         # Connects id to person
         self.persons = dict()
-        self.m = m
-        self.n = n
+        self.m
+        self.n
         self.U = None
         self.UrT = None
         self.avg_face_vector = None
@@ -75,7 +75,7 @@ class PCA:
         p = person(id, alpha, sum_vector, n, name)
         self.persons[id] = p
 
-    def update_person(self, id:int, Sum_Face:np.ndarray, face_vector:np.ndarray):
+    def update_person(self, id:int, face_vector:np.ndarray):
         self.persons[id].Sum_Face += face_vector
         self.persons[id].n += 1
         avg = self.persons[id].Sum_Face / self.persons[id].n

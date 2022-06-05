@@ -16,15 +16,18 @@ class person:
 
 
 class PCA:
-    def __init__(self, data_path: str, m, n) -> None:
+    def __init__(self, data_path: str, U=None, UrT=None, avg=None) -> None:
         self.data_path = data_path
         # Connects id to person
         self.persons = dict()
-        self.m
-        self.n
-        self.U = None
-        self.UrT = None
-        self.avg_face_vector = None
+        self.U = U
+        self.UrT = UrT
+        self.avg_face_vector = avg
+        self.data_path = data_path
+
+        mat_contents = scipy.io.loadmat(data_path)
+        self.m = int(mat_contents['m'])
+        self.n = int(mat_contents['n'])
 
     def im2double(self, im):
         assert not np.issubdtype(im.dtype, np.float64)
@@ -36,27 +39,23 @@ class PCA:
         of a neural network's train function.
         PCA, however, is able to train in a single pass through
         """
-        mat_contents = scipy.io.loadmat(os.path.join('.', 'data', 'allFaces.mat'))
+        mat_contents = scipy.io.loadmat(self.data_path)
 
         faces = mat_contents['faces']
-        self.m = int(mat_contents['m'])
-        self.n = int(mat_contents['n'])
-
-        avg_face_vector = np.mean(faces, axis=1, dtype='float64')
-        avg_face_vector = np.reshape(avg_face_vector, (self.n*self.m, 1))
+        print("face shape:", faces.shape)
+    
+        avg_face_vector = np.mean(self.im2double(faces), axis=1)
+        
 
         X = faces - np.tile(avg_face_vector, (faces.shape[1], 1)).T
         U, S, VT = np.linalg.svd(X, full_matrices=0)
 
+        avg_face_vector = np.reshape(avg_face_vector, (self.m * self.n, 1))
+
         r = 800
 
-        d = plt.imshow(np.reshape(avg_face_vector, (self.m, self.n)).T)
-        d.set_cmap('gray')
-        plt.axis('off')
-        plt.show()
-
         Ur = U[:, :r]
-        print(np.shape(avg_face_vector))
+
         self.U = U
         self.UrT = Ur.T
         self.avg_face_vector = avg_face_vector
@@ -64,14 +63,19 @@ class PCA:
         np.save("UrT.npy", Ur.T)
         np.save("avg_face_vector.npy", avg_face_vector)
 
+
     def compute_alpha(self, face_vector):
         return self.UrT @ (face_vector - self.avg_face_vector)
 
     def add_person(self, id, path, name=""):
         Sum_Img, avg_vector, n = self.avg_images(path)
+        self.vector_show(avg_vector)
         sum_vector = np.reshape(Sum_Img, (self.n * self.m, 1), 'F')
 
         alpha = self.compute_alpha(avg_vector)
+
+        self.vector_show(self.approximate_orig(avg_vector, alpha))
+
         p = person(id, alpha, sum_vector, n, name)
         self.persons[id] = p
 
@@ -101,8 +105,11 @@ class PCA:
         img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (self.m, self.n))
         face_vector = np.reshape(img, (self.m * self.n, 1), 'F')
-
-        alpha = self.compute_alpha(self, face_vector)
+        face_vector = self.im2double(face_vector)
+        self.vector_show(face_vector)
+        
+        alpha = self.compute_alpha(face_vector)
+        self.vector_show(self.approximate_orig(face_vector, alpha))
 
         #  Find person with most similar alpha
         #  Ignore first 3 principle components as these will have most
@@ -136,3 +143,18 @@ class PCA:
         count = len(imgs)
 
         return (sum, x, count)
+    
+    def approximate_orig(self, avg_face_vector, alpha):
+        """
+        Returns an approximation of the original image
+        """
+        return avg_face_vector + np.matmul(self.UrT.T, alpha)
+    
+    def vector_show(self, v):
+        """
+        Shows vector as an image
+        """
+        im = np.reshape(v, (self.m, self.n)).T
+        cv2.imshow("image", im)
+        cv2.waitKey()
+        cv2.destroyAllWindows()

@@ -1,2 +1,2 @@
-from .pca import pca
+from .pca import PCA
 from .pca import person

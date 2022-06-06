@@ -13,3 +13,15 @@ and also to average all the images of a person after converting
 them to grayscale, and resizing them to be a specifed size. This
 file also has two classes. The first class is a person class, which is defined by a name, id, alpha (the projection of a given face onto the data), sum and n. The PCA class is defined by m, n (the dimentions the images should be resized to).
 U (the unitary matrix from the SVD of the data), UrT (the transpose of the rank approximation of U) and Avg_Face (the average of the data).
+
+## References:
+WiderFace data:
+  @inproceedings{yang2016wider,
+	Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},
+	Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+	Title = {WIDER FACE: A Face Detection Benchmark},
+	Year = {2016}}
+allFaces.mat:
+Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press. 
+
+  

@@ -18,7 +18,7 @@ U (the unitary matrix from the SVD of the data), UrT (the transpose of the rank 
 WiderFace data:
 
   @inproceedings{yang2016wider,
-	Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},\n
+	Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},
 	Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
 	Title = {WIDER FACE: A Face Detection Benchmark},
 	Year = {2016}}

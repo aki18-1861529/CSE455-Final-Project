@@ -87,7 +87,7 @@ class PCA:
         self.persons[id].alpha = alpha
 
     def euc_dist(self, u, v):
-        return np.sqrt(np.sum(np.square(u, v)))
+        return np.sqrt(np.sum(np.square(u - v)))
 
     def predict(self, img_path: str):
         """

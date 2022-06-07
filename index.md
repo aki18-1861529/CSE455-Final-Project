@@ -1,4 +1,4 @@
-# CSE 455 Final Project - Face Detection and Recognition
+## Face Detection and Recognition
 
 CSE 455 Spring 2022
 

@@ -49,6 +49,10 @@ def main( train:bool):
     """
     num_right = 0
     num_wrong = 0
+    test_alphas = dict()
+    for i in cropped_data:
+        test_alphas[i] = []
+
     for i, (name, dir) in enumerate(cropped_data.items()):
         test_dir = dir + "/test/"
         for filename in os.listdir(test_dir):
@@ -56,6 +60,7 @@ def main( train:bool):
                 continue
             img_path = os.path.join(test_dir, filename)
             id, dist, img = pca.predict(img_path)
+            test_alphas[name].append(pca.compute_alpha(img))
             if id == i:
                 print('Matched!')
                 num_right += 1
@@ -63,34 +68,43 @@ def main( train:bool):
                 print("Incorrect match :(")
                 print("   Euc Dist:", dist)
                 print("   Guessed", pca.persons[id].name, "should have been", name)
-                pca.vector_show(img)
+                #pca.vector_show(img)
                 num_wrong += 1
     print("Number right:", num_right)
     print("Num_wrong:", num_wrong)
 
-    '''Show points in 3d:
     fig = plt.figure()
-    
-    # syntax for 3-D projection
-    ax = plt.axes(projection ='3d')
-    
-    # defining all 3 axes
-    z = np.linspace(0, 1, 100)
-    x = z * np.sin(25 * z)
-    y = z * np.cos(25 * z)
-    
-    # plotting
-    ax.plot3D(x, y, z, 'green')
-    ax.set_title('3D line plot geeks for geeks')
-    plt.show()'''
+    ax = plt.axes(projection='3d')
+    ax.set_title("Principal Components of Images")
+    ax.set_xlabel("9th PC")
+    ax.set_ylabel("10th PC")
+    ax.set_zlabel("11th PC")
 
-    """2d plot"""
-    '''for i, (name, dir) in enumerate(cropped_data.items()):
-        test_dir = dir + "/test/"
-        for filename in os.listdir(test_dir):
-            if not filename.endswith(".jpg"):
-                continue'''
+    colors = ['green', 'red', 'blue', 'orange']
+    e1=9
+    e2=10
+    e3=8
+    for i, person in enumerate(pca.persons.values()):
+        a = person.alpha
+        ax.scatter3D([a[e1,0]], [a[e2,0]],[a[e3,0]], marker="o",color=colors[i],
+            label=person.name+' avg')
 
+    for i, (name, alphas) in enumerate(test_alphas.items()):
+        for k, a in enumerate(alphas):
+            if k == 0:
+                ax.scatter3D([a[e1,0]], [a[e2, 0]], [a[e3,0]], marker="^", color=colors[i], label=name+ ' test')
+            else:
+                ax.scatter3D([a[e1,0]], [a[e2, 0]], [a[e3,0]], marker="^", color=colors[i])
+    '''for i, person in enumerate(pca.persons.values()):
+        a = person.alpha
+        plt.plot([a[e1,0]], [a[e2,0]], marker="o",color=colors[i],
+            label=person.name+' Avg')
+
+    for i, (name, alphas) in enumerate(test_alphas.items()):
+        for a in alphas:
+            plt.plot([a[e1,0]], [a[e2, 0]], marker="^", color=colors[i], label=name+' test')'''
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, ncol=5)
+    plt.show()
 
 
 

@@ -71,7 +71,7 @@ class PCA:
 
     def add_person(self, id, path, name=""):
         Sum_Img, avg_vector, n = self.avg_images(path)
-        self.vector_show(avg_vector)
+        #self.vector_show(avg_vector)
         sum_vector = np.reshape(Sum_Img, (self.n * self.m, 1), 'F')
 
         alpha = self.compute_alpha(avg_vector)

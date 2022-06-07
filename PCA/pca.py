@@ -43,6 +43,8 @@ class PCA:
 
         faces = mat_contents['faces']
         print("face shape:", faces.shape)
+        #self.vector_show(faces[:,0])
+
     
         avg_face_vector = np.mean(self.im2double(faces), axis=1)
         
@@ -74,7 +76,7 @@ class PCA:
 
         alpha = self.compute_alpha(avg_vector)
 
-        self.vector_show(self.approximate_orig(avg_vector, alpha))
+        #self.vector_show(self.approximate_orig(avg_vector, alpha))
 
         p = person(id, alpha, sum_vector, n, name)
         self.persons[id] = p
@@ -87,7 +89,7 @@ class PCA:
         self.persons[id].alpha = alpha
 
     def euc_dist(self, u, v):
-        return np.sqrt(np.sum(np.square(u - v)))
+        return np.linalg.norm(u-v)
 
     def predict(self, img_path: str):
         """
@@ -100,16 +102,18 @@ class PCA:
         """
         match = -1
         if not os.path.isfile(img_path):
-            return match
+            print("ERROR: NOT A FILE")
+            print(img_path)
+            return (match,0,0)
 
         img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (self.m, self.n))
         face_vector = np.reshape(img, (self.m * self.n, 1), 'F')
         face_vector = self.im2double(face_vector)
-        self.vector_show(face_vector)
+        #self.vector_show(face_vector)
         
         alpha = self.compute_alpha(face_vector)
-        self.vector_show(self.approximate_orig(face_vector, alpha))
+        #self.vector_show(self.approximate_orig(face_vector, alpha))
 
         #  Find person with most similar alpha
         #  Ignore first 3 principle components as these will have most
@@ -120,7 +124,7 @@ class PCA:
             if dist < min_dist:
                 min_dist = dist
                 match = id
-        return match, min_dist
+        return (match, min_dist, face_vector)
 
     def avg_images(self, img_dir):
         """
@@ -137,7 +141,7 @@ class PCA:
         for i in range(len(imgs)):
             im = cv2.resize(self.im2double(imgs[i]), (self.m, self.n))
             sum = np.add(sum, im)
-
+        print("len of images:", len(imgs))
         avg = sum / len(imgs)
         x = np.reshape(avg, (self.n * self.m, 1), 'F')
         count = len(imgs)

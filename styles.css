@@ -1,5 +1,5 @@
 body {
-    background-color: beige;
+    background-color: lightgray;
   }
 
 #title {
@@ -33,24 +33,36 @@ body {
 
 #title > div > p {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 section {
+    font-family: 'Courier New', monospace;
     border-style: solid;
     border-color: gray;
     border-width: 1px;
     border-radius: 15px;
-    max-width: 70%;
+    max-width: 50%;
     margin-right:auto;
     margin-left:auto;
     padding: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: white;
+    font-size: 20px;
 }
 
-/* section:hover {
+section:hover {
     background-color: #ebebeb;
     transition: 0.3s;
-} */
+
+}
+
+section > h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+li {
+    margin-left: 10px;
+    list-style-type: circle;
+ }

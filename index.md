@@ -2,7 +2,7 @@
 
 CSE 455 Spring 2022
 
-Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, Edison Chau
+Duke Parks, Amanda Ki, Priti Ahya, Abbas Hersi, Michael Wen, Edison Chau
 
 ## Project Video
 [https://www.youtube.com/watch?v=IdOz8Zd-bQ0](https://www.youtube.com/watch?v=IdOz8Zd-bQ0)
@@ -87,4 +87,4 @@ Recognition (CVPR), 2016.
 
 Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press.
 
-![DETR tutorial](https://github.com/thedeepreader/detr_tutorial)
+[DETR tutorial](https://github.com/thedeepreader/detr_tutorial)

@@ -6,9 +6,6 @@ This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya
 The webpage describing our project can be found in the following link:
 https://aki18-1861529.github.io/CSE455-Final-Project/
 
-## Description:
-This project will use Principal Component Analysis (PCA) and Eigenfaces to identify who a face belongs to, as well as output an euclidean distance which can be used as a metric of uncertainty.
-
 ## Walkthrough:
 PCA/pca.py contains functions used to train our function, add a person to be indentified, update a person, predict who a person
 from an image is (or return None if the file isn't found),

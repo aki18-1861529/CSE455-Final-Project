@@ -57,7 +57,7 @@ As one could imagine, there are a number of different approaches to both face de
 <ins>Face Detection:</ins>
 - Haar Cascade Classifier
 - R-CNNs
-- YOLO\
+- YOLO
 <ins>Face Recognition:</ins>
 - 3D Face Reconstruction + Classification
 - ViT

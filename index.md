@@ -53,11 +53,13 @@ It’s important to note that the four misidentified images all returned higher 
 A similarity between all of the mismatched images is that the bounding boxes on their faces weren’t very tight and thus included a lot of background information which is likely the reason for the misidentification. This highlights an important weakness of PCA: noise and variability. Had we been able to train DETR for longer than four epochs, the bounding boxes would likely have been tighter and less likely to have resulted in these mismatches.
 
 ## Alternative Approaches
-As one could imagine, there are a number of different approaches to both face detection and face recognition. Just a few examples are listed below:\
+As one could imagine, there are a number of different approaches to both face detection and face recognition. Just a few examples are listed below:
+
 <ins>Face Detection:</ins>
 - Haar Cascade Classifier
 - R-CNNs
 - YOLO
+
 <ins>Face Recognition:</ins>
 - 3D Face Reconstruction + Classification
 - ViT

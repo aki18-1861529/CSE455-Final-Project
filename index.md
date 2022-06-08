@@ -4,6 +4,9 @@ CSE 455 Spring 2022
 
 Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, Edison Chau
 
+## Project Video
+[https://www.youtube.com/watch?v=IdOz8Zd-bQ0](https://www.youtube.com/watch?v=IdOz8Zd-bQ0)
+
 ## Introduction
 Facial recognition is a technology that has been around for decades. During this time, the technology has matured, and saw many different applications in various fields, ranging from live camera filters to security. Despite the range of applications it has, facial recognition boils down to software that can detect a person's face in visual media, such as photos and videos.
 
@@ -77,9 +80,6 @@ Most of the challenges we faced over the course of the project involved figuring
 
 If given more time on the project, we would like to explore and incorporate other publicly-available facial recognition technologies and see how they compare with each other and see if we can determine a “sweet spot” of sorts that balances resource usage and accuracy. We also would like to create a more quantitative comparison of different face detection and face recognition techniques. Such a comparison could be the differences in accuracy and compute time of DETR versus Haar Cascade Classifiers for face detection.
 
-## Project Video
-https://www.youtube.com/watch?v=IdOz8Zd-bQ0
-
 ## References
 Shuo Yang, Ping Luo, Chen Change Loy, and Xiaoou Tang. Wider face: A face
 detection benchmark. In IEEE Conference on Computer Vision and Pattern
@@ -87,4 +87,4 @@ Recognition (CVPR), 2016.
 
 Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press.
 
-https://github.com/thedeepreader/detr_tutorial
+![DETR tutorial](https://github.com/thedeepreader/detr_tutorial)

@@ -6,6 +6,10 @@ This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya
 The webpage describing our project can be found in the following link:
 https://aki18-1861529.github.io/CSE455-Final-Project/
 
+## Project Video:
+Video description and overview of our project: 
+https://www.youtube.com/watch?v=IdOz8Zd-bQ0&t=154s
+
 ## Walkthrough:
 PCA/pca.py contains functions used to train our function, add a person to be indentified, update a person, predict who a person
 from an image is (or return None if the file isn't found),

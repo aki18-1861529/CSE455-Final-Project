@@ -53,6 +53,7 @@ def main( train:bool):
     for i in cropped_data:
         test_alphas[i] = []
 
+    match_sum = 0
     for i, (name, dir) in enumerate(cropped_data.items()):
         test_dir = dir + "/test/"
         for filename in os.listdir(test_dir):
@@ -64,14 +65,21 @@ def main( train:bool):
             if id == i:
                 print('Matched!')
                 num_right += 1
+                match_sum += dist
+
             else:
                 print("Incorrect match :(")
                 print("   Euc Dist:", dist)
                 print("   Guessed", pca.persons[id].name, "should have been", name)
-                #pca.vector_show(img)
+                im = np.reshape(img, (pca.m, pca.n)).T
+                plt.imshow(im, cmap='gray')
+                plt.title("Guessed: " + pca.persons[id].name)
+                plt.axis('off')
+                plt.show()
                 num_wrong += 1
     print("Number right:", num_right)
     print("Num_wrong:", num_wrong)
+    print("Average Distance on Correct Matches:", match_sum / num_right)
 
     fig = plt.figure()
     ax = plt.axes(projection='3d')
@@ -95,14 +103,7 @@ def main( train:bool):
                 ax.scatter3D([a[e1,0]], [a[e2, 0]], [a[e3,0]], marker="^", color=colors[i], label=name+ ' test')
             else:
                 ax.scatter3D([a[e1,0]], [a[e2, 0]], [a[e3,0]], marker="^", color=colors[i])
-    '''for i, person in enumerate(pca.persons.values()):
-        a = person.alpha
-        plt.plot([a[e1,0]], [a[e2,0]], marker="o",color=colors[i],
-            label=person.name+' Avg')
-
-    for i, (name, alphas) in enumerate(test_alphas.items()):
-        for a in alphas:
-            plt.plot([a[e1,0]], [a[e2, 0]], marker="^", color=colors[i], label=name+' test')'''
+    
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, ncol=5)
     plt.show()
 

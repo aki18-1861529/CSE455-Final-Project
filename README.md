@@ -7,8 +7,8 @@ The webpage describing our project can be found in the following link:
 https://aki18-1861529.github.io/CSE455-Final-Project/
 
 ## Project Video:
-Video description and overview of our project: 
-https://www.youtube.com/watch?v=IdOz8Zd-bQ0&t=154s
+Video description and overview of our project:
+https://www.youtube.com/watch?v=IdOz8Zd-bQ0
 
 ## Walkthrough:
 PCA/pca.py contains functions used to train our function, add a person to be indentified, update a person, predict who a person
@@ -25,10 +25,10 @@ Shuo Yang, Ping Luo, Chen Change Loy, and Xiaoou Tang. Wider face: A face
 detection benchmark. In IEEE Conference on Computer Vision and Pattern
 Recognition (CVPR), 2016.
 
-	
+
 allFaces.mat:
 
-Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press. 
+Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press.
 
 DETR tutorial:
 

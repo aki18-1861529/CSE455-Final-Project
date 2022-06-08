@@ -1,6 +1,6 @@
 # CSE455 Final Project: Facial Recognition
 ## Introduction:
-This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, and Edison Chau.
+This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya, Abbas Hersi, Michael Wen, and Edison Chau.
 
 ## Project Website:
 The webpage describing our project can be found in the following link:

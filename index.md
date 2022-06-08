@@ -23,7 +23,7 @@ Some pre-existing work and resources that we used in this project include:
 As a brief summary of the parts of our project that we implemented ourselves:
 - Collected celebrity photos
 - Trained DETR on WiderFaces data for 4 epochs
-- Ran collected photos through detr
+- Ran collected photos through DETR
 - Extracted bounding boxes from output of DETR and cropped out detected faces
 - PCA face recognition
 

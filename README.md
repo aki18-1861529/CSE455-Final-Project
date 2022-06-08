@@ -1,14 +1,14 @@
 # CSE455 Final Project: Facial Recognition
 ## Introduction:
-This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, and Edison Chau.
+This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya, Abbas Hersi, Michael Wen, and Edison Chau.
 
 ## Project Website:
 The webpage describing our project can be found in the following link:
 https://aki18-1861529.github.io/CSE455-Final-Project/
 
 ## Project Video:
-Video description and overview of our project: 
-https://www.youtube.com/watch?v=IdOz8Zd-bQ0&t=154s
+Video description and overview of our project:
+https://www.youtube.com/watch?v=IdOz8Zd-bQ0
 
 ## Walkthrough:
 PCA/pca.py contains functions used to train our function, add a person to be indentified, update a person, predict who a person
@@ -25,10 +25,11 @@ Shuo Yang, Ping Luo, Chen Change Loy, and Xiaoou Tang. Wider face: A face
 detection benchmark. In IEEE Conference on Computer Vision and Pattern
 Recognition (CVPR), 2016.
 
-	
+
 allFaces.mat:
 
-Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press. 
+Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press.
 
 DETR tutorial:
+
 https://github.com/thedeepreader/detr_tutorial

@@ -54,10 +54,12 @@ A similarity between all of the mismatched images is that the bounding boxes on 
 
 ## Alternative Approaches
 As one could imagine, there are a number of different approaches to both face detection and face recognition. Just a few examples are listed below:
+<br />
 <ins>Face Detection:</ins>
 - Haar Cascade Classifier
 - R-CNNs
 - YOLO
+<br />
 <ins>Face Recognition:</ins>
 - 3D Face Reconstruction + Classification
 - ViT

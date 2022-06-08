@@ -28,14 +28,14 @@ As a brief summary of the parts of our project that we implemented ourselves:
 - PCA face recognition
 
 ## Techniques
-image here
+![Mismatches](/imgs/mismatches.jpg)
 
-DETR is able to detect multiple faces in an image. We used the existing DETR network pre-trained on the COCO dataset with a ResNet50 backbone and retrained it on the WiderFaces dataset so that it would detect faces rather than objects. Then, we gave it images of celebrities collected from the internet. Since DETR outputs bounding boxes for each face detected in an image, we used the bounding boxes to crop and save each face found. The cropped celebrity faces output from DETR were then used as input images for PCA. 
+DETR is able to detect multiple faces in an image. We used the existing DETR network pre-trained on the COCO dataset with a ResNet50 backbone and retrained it on the WiderFaces dataset so that it would detect faces rather than objects. Then, we gave it images of celebrities collected from the internet. Since DETR outputs bounding boxes for each face detected in an image, we used the bounding boxes to crop and save each face found. The cropped celebrity faces output from DETR were then used as input images for PCA.
 
 For facial recognition, we chose to use PCA/Eigenfaces. In implementing this project, we created a PCA model from scratch to analyze the human face using faces from the Yale Face Database B. The input images of celebrities from DETR are first grayscaled and resized to the same width and length. The resized images are then used to find their “average” face for classification. PCA is performed on each input image. The result of each input image is compared with the results of the average faces to classify each image. The intuition of this can be seen in the graph below that shows the 8th, 9th, and 10th principal components of test images and average faces.
 
-gif here
-  
+![Plot](/imgs/plotgit.gif)
+
 Even though this is a lower dimensional image, you can still see some clustering occurring.  We can expect a greater degree of clustering to be present in the full 800-dimensional space.
 
 ## Datasets
@@ -46,7 +46,7 @@ Even though this is a lower dimensional image, you can still see some clustering
 ## Results
 While we had a small test set, the results were very positive. Of 27 test images, 23 were correctly identified. The below images show the four mismatched faces:
 
-image here
+![DETR PCA Diagram](/imgs/detr-pca_diagram.jpg)
 
 It’s important to note that the four misidentified images all returned higher than the average Euclidean distance to its match, indicating that the match wasn’t confident. The Euclidean distance can be used as a measurement of uncertainty. In our implementation, we set it so that a guess would always be made. If we were scaling this program up for a different purpose, such as finding a specific person in a crowd, we would tweak it so that faces with a high minimum Euclidean distance are instead identified as “Unknown.”
 
@@ -70,7 +70,7 @@ All of these techniques have both advantages and disadvantages. For instance, 3D
 
 We decided to go with our implementation for a number of reasons. We chose to use DETR over the many possible networks/algorithms that can do face detection for its novelty. DETR is among the first detection/classification networks to incorporate transformers into its architecture. The use of transformers for such tasks is an exciting new frontier in computer vision that has thus far shown great results. As an example of this, DINO, a refinement of DETR, is ranked #1 on Object Detection on COCO test-dev and COCO minival on PapersWithCode.com. We chose to use PCA for face recognition because it requires far less data and computes resources to produce fairly accurate results. Because PCA is so lightweight, we were able to collect our own data that was tailored precisely to our needs, thereby making implementation faster and easier than if we had to find an existing dataset for more general purposes.
 
-## Challenges and Potential Improvements 
+## Challenges and Potential Improvements
 Our initial project goal was to design software that allowed users to superimpose clothing designs onto images of models. This would enable users to simulate what the clothing would look like without the need for a physical model. However, due to constraints such as a lack of time and unfamiliarity with certain resources, such as how we would have needed Blender for the project, a program none of our group members have experience with, we decided to shift our project topic to the current facial recognition focus.
 
 Most of the challenges we faced over the course of the project involved figuring out how to integrate the pre-existing technologies we chose into the project. DETR was especially difficult to incorporate. We had trouble figuring out how it was structured, making it challenging to give it a proper input and interpret the output correctly. Additionally, DETR is very resource-demanding and requires a GPU that no one in our group had. This resulted in our group splitting our project: half of it on Colab, half of it on Github.

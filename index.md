@@ -2,7 +2,7 @@
 
 CSE 455 Spring 2022
 
-Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, Edison Chau
+Duke Parks, Amanda Ki, Priti Ahya, Abbas Hersi, Michael Wen, Edison Chau
 
 ## Project Video
 [https://www.youtube.com/watch?v=IdOz8Zd-bQ0](https://www.youtube.com/watch?v=IdOz8Zd-bQ0)

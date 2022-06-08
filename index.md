@@ -28,7 +28,7 @@ As a brief summary of the parts of our project that we implemented ourselves:
 - PCA face recognition
 
 ## Techniques
-![Mismatches](/imgs/mismatches.jpg)
+![DETR PCA Diagram](/imgs/detr-pca_diagram.jpg)
 
 DETR is able to detect multiple faces in an image. We used the existing DETR network pre-trained on the COCO dataset with a ResNet50 backbone and retrained it on the WiderFaces dataset so that it would detect faces rather than objects. Then, we gave it images of celebrities collected from the internet. Since DETR outputs bounding boxes for each face detected in an image, we used the bounding boxes to crop and save each face found. The cropped celebrity faces output from DETR were then used as input images for PCA.
 
@@ -46,7 +46,7 @@ Even though this is a lower dimensional image, you can still see some clustering
 ## Results
 While we had a small test set, the results were very positive. Of 27 test images, 23 were correctly identified. The below images show the four mismatched faces:
 
-![DETR PCA Diagram](/imgs/detr-pca_diagram.jpg)
+![Mismatches](/imgs/mismatches.jpg)
 
 It’s important to note that the four misidentified images all returned higher than the average Euclidean distance to its match, indicating that the match wasn’t confident. The Euclidean distance can be used as a measurement of uncertainty. In our implementation, we set it so that a guess would always be made. If we were scaling this program up for a different purpose, such as finding a specific person in a crowd, we would tweak it so that faces with a high minimum Euclidean distance are instead identified as “Unknown.”
 

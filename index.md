@@ -87,4 +87,4 @@ Recognition (CVPR), 2016.
 
 Brunton, S. L., Kutz, J. N. (2022). Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control. Cambridge University Press.
 
-![DETR tutorial](https://github.com/thedeepreader/detr_tutorial)
+[DETR tutorial](https://github.com/thedeepreader/detr_tutorial)

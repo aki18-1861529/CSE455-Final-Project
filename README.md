@@ -2,6 +2,10 @@
 ## Introduction:
 This is the final project for CSE 455, done by Duke Parks, Amanda Ki, Priti Ahya, Abas Hersi, Michael Wen, and Edison Chau.
 
+## Project Website:
+The webpage describing our project can be found in the following link:
+https://aki18-1861529.github.io/CSE455-Final-Project/
+
 ## Description:
 This project will use Principal Component Analysis (PCA) and Eigenfaces to identify who a face belongs to, or if the face is
 unidentified.

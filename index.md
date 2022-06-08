@@ -1,4 +1,4 @@
-## Face Detection and Recognition
+## Facial Detection and Recognition
 
 CSE 455 Spring 2022
 
